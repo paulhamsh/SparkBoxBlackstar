@@ -32,4 +32,5 @@ Parts:
 - Beetle ESP32-C3 
 - RS232 port breakout board (like this on Amazon "sourcing map D-sub DB9 Breakout Board Connector 9 Pin 2 Row Male RS232 Serial Port")  
 
-Thanks to @happyhappysundays and @copych for SparkBox !!
+Thanks to happyhappysundays and copych for SparkBox !!   
+https://github.com/happyhappysundays/SparkBox   

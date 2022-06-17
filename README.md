@@ -19,6 +19,8 @@ Then you can make one of these:
 </p>
 
 
-And it will control your Spark 40 amp!!    
+And it will control your Spark 40 amp!! 
+
+It uses a ESP32-C£ Beetle - which is cheap and tiny!!    
 
 

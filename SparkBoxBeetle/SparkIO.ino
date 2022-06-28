@@ -165,13 +165,14 @@ void app_process()
 //////////////////// TEMPORARY TO DEBUG BAD BLOCK PROCESSING
 bool in_bad_block = false;
 
+
 void BlockIn::process() {
   uint8_t b;
   bool boo;
 
   while (data_available()) {
     b = data_read();
-   
+
     // **** PASSTHROUGH APP AND AMP ****
 
     if (pass_through) {

@@ -27,7 +27,8 @@ class MyClientCallback : public BLEClientCallbacks
   bool onConnParamsUpdateRequest(BLEClient* pClient, const ble_gap_upd_params* params) {
     DEBUG("Connection callback");
     got_param_callback = true;
-    return true;
+    //return true;
+    return false;
   };
 #endif
 };
@@ -89,6 +90,10 @@ void bt_callback(esp_spp_cb_event_t event, esp_spp_cb_param_t *param){
 }
 #endif
 
+//
+int prloc = 0;
+//
+
 void notifyCB_sp(BLERemoteCharacteristic* pRemoteCharacteristic, uint8_t* pData, size_t length, bool isNotify) {
 
   int i;
@@ -120,16 +125,18 @@ void notifyCB_pedal(BLERemoteCharacteristic* pRemoteCharacteristic, uint8_t* pDa
 
 class CharacteristicCallbacks: public BLECharacteristicCallbacks {
   void onWrite(BLECharacteristic* pCharacteristic) {
-        int j, l;
-        const char *p;
-        byte b;
-        l = pCharacteristic->getValue().length();
-        p = pCharacteristic->getValue().c_str();
-        for (j=0; j < l; j++) {
-          b = p[j];
-          ble_app_in.add(b);
-        }
-        ble_app_in.commit();
+    int j, l;
+    std::string s;
+    byte b;
+    
+    s = pCharacteristic->getValue();
+    l = pCharacteristic->getValue().length();
+
+    for (j = 0; j < l; j++) {
+      b = (byte) s[j];
+      ble_app_in.add(b);
+    }
+    ble_app_in.commit();
   };
 };
 
@@ -141,12 +148,14 @@ static CharacteristicCallbacks chrCallbacks_s, chrCallbacks_r;
 class MIDICharacteristicCallbacks: public BLECharacteristicCallbacks {
   void onWrite(BLECharacteristic* pCharacteristic) {
         int j, l;
-        const char *p;
+        std::string s;
         byte b;
+        
         l = pCharacteristic->getValue().length();
-        p = pCharacteristic->getValue().c_str();
-        for (j=0; j < l; j++) {
-          b = p[j];
+        s = pCharacteristic->getValue();
+        
+        for (j = 0; j < l; j++) {
+          b = (byte) s[j];
           ble_midi_in.add(b);
         }
         ble_midi_in.commit();
@@ -248,7 +257,7 @@ bool connect_to_all() {
   is_ble = true;
   got_param_callback = false;
 
-  BLEDevice::init(SPARK_BT_NAME);
+  BLEDevice::init(SPARK_BLE_NAME);
   pClient_sp = BLEDevice::createClient();
   pClient_sp->setClientCallbacks(new MyClientCallback());
   BLEDevice::setMTU(517);

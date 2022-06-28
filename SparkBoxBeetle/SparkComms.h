@@ -60,8 +60,9 @@ void set_conn_sent(int connection);
 #define PEDAL_SERVICE    "03b80e5a-ede8-4b33-a751-6ce34ec4c700"
 #define PEDAL_CHAR       "7772e5db-3868-4112-a1a9-f2669d106bf3"
 
-//#define SPARK_BT_NAME    "Spark MINI BLE"
-#define SPARK_BT_NAME    "Spark 40"
+//#define SPARK_BLE_NAME    "Spark MINI BLE"
+#define SPARK_BLE_NAME    "Spark 40 BLE"
+#define SPARK_BT_NAME    "Spark 40 Audio"
 
 #define MAX_SCAN_COUNT 2
 

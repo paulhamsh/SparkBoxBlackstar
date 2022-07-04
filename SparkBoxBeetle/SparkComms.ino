@@ -125,16 +125,8 @@ void notifyCB_pedal(BLERemoteCharacteristic* pRemoteCharacteristic, uint8_t* pDa
 
 class CharacteristicCallbacks: public BLECharacteristicCallbacks {
   void onWrite(BLECharacteristic* pCharacteristic) {
-    int j, l;
-    std::string s;
-    byte b;
-    
-    s = pCharacteristic->getValue();
-    l = pCharacteristic->getValue().length();
-
-    for (j = 0; j < l; j++) {
-      b = (byte) s[j];
-      ble_app_in.add(b);
+    for (auto & it : pCharacteristic->getValue()) {
+      ble_app_in.add(it);
     }
     ble_app_in.commit();
   };
@@ -146,19 +138,11 @@ static CharacteristicCallbacks chrCallbacks_s, chrCallbacks_r;
 // BLE APP MIDI
 #ifdef BLE_APP_MIDI
 class MIDICharacteristicCallbacks: public BLECharacteristicCallbacks {
-  void onWrite(BLECharacteristic* pCharacteristic) {
-        int j, l;
-        std::string s;
-        byte b;
-        
-        l = pCharacteristic->getValue().length();
-        s = pCharacteristic->getValue();
-        
-        for (j = 0; j < l; j++) {
-          b = (byte) s[j];
-          ble_midi_in.add(b);
-        }
-        ble_midi_in.commit();
+    void onWrite(BLECharacteristic* pCharacteristic) {
+    for (auto & it : pCharacteristic->getValue()) {
+      ble_midi_in.add(it);
+    }
+    ble_midi_in.commit();
   };
 };
 

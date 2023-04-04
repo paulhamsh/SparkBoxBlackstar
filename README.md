@@ -24,7 +24,7 @@ And it will control your Spark 40 amp!!
 It uses a ESP32-C3 Beetle - which is cheap and tiny!!    
 
 The C3 is odd for uploading sketches - you need to link GPIO 9 to ground.
-Also set 'Partition Scheme' to 'No OTA (2mb app/2mb spiffs)' and 'UBS CDC On Boot' to 'No'
+Also set 'Partition Scheme' to 'No OTA (2mb app/2mb spiffs)' and 'UBS CDC On Boot' to 'Enabled'
 
 
 Parts:  
